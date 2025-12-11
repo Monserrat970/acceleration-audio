@@ -4,49 +4,70 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Acceleration Audio | The global leader in accelerating music</title>
-
     <link rel="stylesheet" href="output.css" />
   </head>
-  <body>
-    <h1>Acceleration Audio</h1>
+  <body class="min-h-screen bg-white text-slate-900">
+    <div class="mx-auto flex max-w-2xl flex-col gap-5 px-4 py-10">
+      <header class="space-y-1">
+        <p class="text-xs font-semibold text-amber-700">Acceleration Audio</p>
+        <h1 class="text-2xl font-semibold">Local playlist</h1>
+        <p class="text-sm text-slate-600">Shortcuts: space play/pause · m mute · ←/→ seek 10s</p>
+      </header>
 
-    <i data-lucide="x"></i>
-    <i data-lucide="menu"></i>
+      <main class="flex flex-col gap-5">
+        <section class="flex flex-col gap-4 rounded-xl border border-slate-200 bg-slate-50 p-4 shadow-sm">
+          <div class="flex items-center gap-3">
+            <img id="coverArt" class="h-20 w-20 rounded-lg object-cover border border-slate-200" src="albumart/Aidan.jpg" alt="Album art" />
+            <div class="space-y-1">
+              <p class="text-xs text-slate-500">Now playing</p>
+              <h2 id="trackTitle" class="text-lg font-semibold">Aidan</h2>
+              <p id="trackMeta" class="text-sm text-slate-600">Local track</p>
+            </div>
+          </div>
 
-    <button id="playButton">
-      <i data-lucide="play" class="w-50 h-50"></i>
-    </button>
+          <div class="space-y-2">
+            <div class="flex justify-between text-xs text-slate-600">
+              <span id="currentTime">0:00</span>
+              <span id="duration">0:00</span>
+            </div>
+            <div id="progressContainer" class="h-2 w-full cursor-pointer overflow-hidden rounded-full bg-slate-200">
+              <div id="progressFill" class="h-full w-0 rounded-full bg-amber-500 transition-all"></div>
+            </div>
+          </div>
 
-    <a href="">
-      <i data-lucide="play" class="text-transparent fill-amber-600"></i>
-    </a>
+          <div class="flex items-center justify-between gap-3">
+            <div class="flex gap-2">
+              <button id="prevButton" class="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-800 transition hover:border-amber-400">
+                <i data-lucide="skip-back" class="h-5 w-5"></i>
+              </button>
+              <button id="playPauseButton" class="flex h-10 w-10 items-center justify-center rounded-full bg-amber-500 text-white transition hover:bg-amber-400">
+                <i id="playIcon" data-lucide="play" class="h-5 w-5"></i>
+                <i id="pauseIcon" data-lucide="pause" class="hidden h-5 w-5"></i>
+              </button>
+              <button id="nextButton" class="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-800 transition hover:border-amber-400">
+                <i data-lucide="skip-forward" class="h-5 w-5"></i>
+              </button>
+            </div>
 
-    <a href="">
-      <i data-lucide="play" class="text-amber-600 fill-transparent"></i>
-    </a>
+            <div class="text-right text-sm">
+              <p class="text-slate-600">Playback speed</p>
+              <p id="rateDisplay" class="text-base font-semibold text-amber-700">1.00x</p>
+            </div>
+          </div>
+        </section>
 
-    <!-- <div class="icon-play"></div> -->
-    <button id="pauseButton">
-      <i data-lucide="pause" class="text-transparent fill-amber-600 w-50 h-60">
-      </i>
-    </button>
+        <section class="rounded-xl border border-slate-200 bg-slate-50 p-4 shadow-sm">
+          <p class="mb-2 text-sm font-semibold text-slate-700">Playlist</p>
+          <ul id="playlist" class="space-y-2">
+            <!-- Filled by script -->
+          </ul>
+        </section>
+      </main>
+    </div>
 
-    <button id="pauseButton2">
-      <i data-lucide="pause" class="text-amber-600 fill-transparent"> </i>
-    </button>
-
-    <p>
-      <progress id="progress" value="0" max="1" style="width:100%"></progress>
-
-      <div id="custom-progress" class="w-full h-8 bg-amber-100 trasition-all">
-        <div id="custom-progress-bar" class="w-0 h-8 bg-amber-500 z-10"></div>
-      </div>
-    </p>
-
-    <audio src="" id="audioPlayer" controls></audio>
+    <audio id="audioPlayer" class="hidden" preload="metadata"></audio>
 
     <script src="main.js"></script>
-
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
       lucide.createIcons();
